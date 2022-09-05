@@ -27,7 +27,7 @@
           <a class="nav-link"  href="report.php">Report</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">Logout</a>
+          <a class="nav-link" style="color='red'">Logout</a>
         </li>
       </ul>
     </div>

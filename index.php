@@ -1,22 +1,33 @@
 <?php
     include "header.php";
-    $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "ims480";
-
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+    include "connection.php";
 
 $sql = "SELECT * FROM product";
-$result = mysqli_query($conn, $sql);
+$result = $conn -> query ($sql);
+
+
+if(isset($_POST['update_btn'])){
+  $update_id = $_POST['update_id'];
+  $name = $_POST['update_name'];
+  $des = $_POST['update_des'];
+  $unit = $_POST['update_unit'];
+  $unitprice = $_POST['update_unitprice'];
+  
+  $update_query = mysqli_query($conn, "UPDATE `product` SET unitprice = '$unitprice' , name='$name' , des='$des' ,unit='$unit'  WHERE id = '$update_id'");
+  if($update_query){
+     header('location:index.php');
+  };
+};
+
+if(isset($_GET['remove'])){
+  $remove_id = $_GET['remove'];
+  mysqli_query($conn, "DELETE FROM `product` WHERE id = '$remove_id'");
+  header('location:index.php');
+};
 
 
 ?>
+
 <html>
 <head>
     <title></title>
@@ -42,14 +53,17 @@ $result = mysqli_query($conn, $sql);
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
               ?>
+             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                <tr>
-                <!--<th scope="row"></th>-->
-                <td><?php echo $row["name"] ?></td>
-                <td><?php echo $row["des"] ?></td>
-                <td><?php echo $row["unit"] ?></td>
-                <td><?php echo $row["unit_price"] ?></td>
-                <td>Update / Delete</td>
+                <input type="hidden" name="update_id"  value="<?php echo $row['id'];?>">
+                <td><input type="text" name="update_name"  value="<?php echo $row['name'];?>"></td>
+                <td><input type="text" name="update_des"  value="<?php echo $row['des'];?>"></td>
+                <td><input type="number" name="update_unit"  value="<?php echo $row['unit'];?>"></td>
+                <td><input type="number" name="update_unitprice"  value="<?php echo $row['unitprice'];?>"></td>
+                <td><button type="submit" class="btn btn-primary" name="update_btn">update</button></td>
+                <td><a  class="btn btn-primary" href="index.php?remove=<?php echo $row['id']; ?>">delete</a></td>
                 </tr>
+                </form>
                 <?php }
         } else {
             echo "0 results";

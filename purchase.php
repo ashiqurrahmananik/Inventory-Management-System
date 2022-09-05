@@ -1,5 +1,25 @@
 <?php
     include "header.php";
+    include "connection.php";
+
+    if (isset($_POST['submit'])) 
+    {
+    $name=$_POST['name'];
+    $des=$_POST['des'];
+    $unit=$_POST['unit'];
+    $unitprice=$_POST['unitprice'];
+
+    $insertsql = "INSERT INTO product(name, des, unit, unitprice) VALUES ('$name', '$des', '$unit','$unitprice')";
+    
+    if ($conn->query($insertsql) === TRUE) 
+    {
+      echo "New record created successfully";
+    } else 
+    {
+      echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +32,7 @@
 <body>
     <div class="container">
         <h5>Purchase</h5>
-    <form  action="purchase_action.php" method="post">
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
   <div class="mb-3">
     <label for="exampleInputName" class="form-label">Product Name</label>
     <input type="text" name="name" class="form-control" id="exampleInputName">
@@ -30,7 +50,7 @@
     <label for="exampleInputUnitprice" class="form-label">Unit Price</label>
     <input type="number" name="unitprice" class="form-control" id="exampleInputUnitprice">
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" name="submit">Submit</button>
 </form>
     </div>
 </body>
