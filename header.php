@@ -1,3 +1,19 @@
+<?php
+ SESSION_START();
+
+ if(isset($_SESSION['auth']))
+ {
+    if($_SESSION['auth']!=1)
+    {
+        header("location:login.php");
+    }
+ }
+ else
+ {
+    header("location:login.php");
+ }
+?>
+
 <html>
 <head>
     <title></title>
@@ -24,10 +40,13 @@
           <a class="nav-link"  href="sales.php">Sales</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"  href="report.php">Report</a>
+          <a class="nav-link"  href="purchase_report.php">Purchase Report</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="color='red'">Logout</a>
+          <a class="nav-link"  href="sales_report.php">Sales Report</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color:red!important;"  href="logout.php">Logout</a>
         </li>
       </ul>
     </div>
