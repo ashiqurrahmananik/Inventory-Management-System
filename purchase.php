@@ -14,7 +14,7 @@
     $insertsql1 = "INSERT INTO purchase(name, des, unit, unitprice) VALUES ('$name', '$des', '$unit','$unitprice')";
     if ($conn->query($insertsql1) === TRUE) 
     {
-      echo "New record created successfully";
+      echo "";
     } else 
     {
       echo "Error: " . $sql . "<br>" . $conn->error;
@@ -22,7 +22,7 @@
     
     if ($conn->query($insertsql) === TRUE) 
     {
-      echo "New record created successfully";
+      echo "   New record created successfully";
     } else 
     {
       echo "Error: " . $sql . "<br>" . $conn->error;
