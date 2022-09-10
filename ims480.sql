@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2022 at 10:05 PM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.7
+-- Generation Time: Sep 08, 2022 at 02:19 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `product` (
-  `id` int(11) NOT NULL,
+  `id` int(100) NOT NULL,
   `name` varchar(100) NOT NULL,
   `des` varchar(100) NOT NULL,
   `unit` int(100) NOT NULL,
@@ -41,9 +41,32 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `des`, `unit`, `unitprice`, `created_at`) VALUES
-(1, 'Shirt', 'good', 14, 450, '2022-09-05 14:52:05'),
-(3, 'Anik', 'good', 50, 1234, '2022-09-05 14:52:36'),
-(5, 'Anik', 'good', 560, 4654, '2022-09-07 19:39:10');
+(1, 'shirt', 'good', 22, 350, '2022-09-07 08:31:41'),
+(4, 'demo', 'good', 14, 78, '2022-09-08 12:08:24'),
+(5, 'demo1', 'aaaa', 12, 123, '2022-09-08 12:16:47');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchase`
+--
+
+CREATE TABLE `purchase` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `des` varchar(100) NOT NULL,
+  `unit` int(100) NOT NULL,
+  `unitprice` int(100) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `purchase`
+--
+
+INSERT INTO `purchase` (`id`, `name`, `des`, `unit`, `unitprice`, `created_at`) VALUES
+(0, 'start', 'good', 45, 123, '2022-09-08 12:12:17'),
+(0, 'demo1', 'aaaa', 15, 123, '2022-09-08 12:16:47');
 
 -- --------------------------------------------------------
 
@@ -56,25 +79,20 @@ CREATE TABLE `sales` (
   `name` varchar(100) NOT NULL,
   `sellunit` int(100) NOT NULL,
   `totalprice` int(100) NOT NULL,
-  `created_at` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
-  `productid` int(100) DEFAULT NULL
+  `productid` int(100) NOT NULL,
+  `created_at` timestamp(6) NOT NULL DEFAULT current_timestamp(6)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `sales`
 --
 
-INSERT INTO `sales` (`id`, `name`, `sellunit`, `totalprice`, `created_at`, `productid`) VALUES
-(6, 'Shirt', 2, 900, '2022-09-05 15:35:23.235605', 1),
-(7, 'Shirt', 1, 450, '2022-09-05 15:38:13.537607', 1),
-(8, 'Shirt', 1, 450, '2022-09-05 15:38:57.778705', 1),
-(9, 'Shirt', 6, 2700, '2022-09-05 15:39:02.314293', 1),
-(10, 'Shirt', 1, 450, '2022-09-05 15:40:27.149784', 1),
-(11, 'Anik', 0, 0, '2022-09-05 15:40:35.913893', 3),
-(12, 'Anik', 1, 1234, '2022-09-05 15:40:38.090130', 3),
-(13, 'Shirt', 5, 2250, '2022-09-07 17:04:31.664109', 1),
-(14, 'Anik', 5, 23270, '2022-09-07 19:45:57.315523', 5),
-(15, 'Anik', 5, 6170, '2022-09-07 19:45:59.738015', 3);
+INSERT INTO `sales` (`id`, `name`, `sellunit`, `totalprice`, `productid`, `created_at`) VALUES
+(1, 'shirt', 4, 1400, 1, '2022-09-07 08:31:58.166350'),
+(2, 'shirt', 7, 2450, 1, '2022-09-07 08:32:37.427556'),
+(3, 'shirt', 5, 1750, 1, '2022-09-07 09:32:38.604261'),
+(4, 'demo', 5, 390, 4, '2022-09-08 12:08:38.782405'),
+(5, 'demo1', 2, 246, 5, '2022-09-08 12:16:57.416077');
 
 --
 -- Indexes for dumped tables
@@ -100,13 +118,13 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

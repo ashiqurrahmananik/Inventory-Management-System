@@ -7,7 +7,7 @@ if (isset($_POST['submit']))
     $starttime=$_POST['starttime'];
     $endtime=$_POST['endtime'];
 
-$sql = "SELECT * FROM product where created_at>='$starttime' && created_at<'$endtime'";
+$sql = "SELECT * FROM purchase where created_at>='$starttime' && created_at<'$endtime'";
 $res = $conn -> query ($sql);
 }
 
@@ -39,7 +39,7 @@ $res = $conn -> query ($sql);
       <!--<th scope="col">#</th>-->
       <th scope="col">Product Name</th>
       <th scope="col">Unit</th>
-      <th scope="col">Unit Price</th>
+      <th scope="col">Total Unit Price</th>
     </tr>
   </thead>
   <tbody>
@@ -49,12 +49,12 @@ $res = $conn -> query ($sql);
           if (mysqli_num_rows($res) > 0) {
             // output data of each row
             while($row = mysqli_fetch_assoc($res)) {
-                $t=$t+$row['unitprice'];
+                $t=$t+($row['unit']*$row['unitprice']);
               ?>
                <tr>
                 <td><?php echo $row['name'];?></td>
                 <td><?php echo $row['unit'];?></td>
-                <td><?php echo $row['unitprice'];?></td>
+                <td><?php echo $row['unit']*$row['unitprice'];?></td>
 
                 </tr>
                 </form>
