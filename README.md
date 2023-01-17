@@ -8,6 +8,10 @@
 6. Import ims480.sql file(given inside the zip package in SQL file folder)
 7. Run the script http://localhost/Inventory-Management-System
 
+<br>
+<a href="https://www.buymeacoffee.com/ashiquranik"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=ashiquranik&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
+<br>
+
 ## Credential for admin panel
 - username: admin
 - Password: admin
