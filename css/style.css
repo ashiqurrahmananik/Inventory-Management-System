@@ -6,3 +6,12 @@ a.navbar-brand {
   color: black;
   font-weight: 700;
 }
+
+banner{
+  color: gray;
+  align-self: center;
+}
+
+form-group submit-btn{
+  align-self: center;
+}

@@ -6,7 +6,7 @@ if(isset($_SESSION['auth']))
 {
     if($_SESSION['auth']==1)
     {
-        header("location:index.php");
+        header("location:book.php");
     }
 }
 
@@ -19,7 +19,7 @@ if(isset($_SESSION['auth']))
         if($id=='admin' && $pass=='admin')
         {
             $_SESSION['auth']=1;
-            header("location:index.php");
+            header("location:book.php");
         }
 
         else
@@ -38,25 +38,31 @@ if(isset($_SESSION['auth']))
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Sign in | PIMS</title>
 
 </head>
 <body>
 <div class="container">
+    <br>    <div class="d-flex justify-content-center">     <br><br><br>
+        <h2>Publishers Information Management System</h2>
+    </div>
     <div class="d-flex justify-content-center">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-center">
                 <h3>Sign In</h3>
             </div>
             <div class="card-body">
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                     <div class="input-group form-group">
                         <input type="text" class="form-control" placeholder="username" name="id">
-                        
                     </div>
+                    <br>
                     <div class="input-group form-group">
-                        <input type="password" class="form-control" placeholder="password" name="password">
+                        <input type="password" class="form-control align-middle" placeholder="password" name="password">
                     </div>
-                    <div class="form-group">
+                    <br>
+                    <div class="form-group submit-btn">
                         <input type="submit" value="Login" class="btn btn-primary" name="submit">
                     </div>
                 </form>

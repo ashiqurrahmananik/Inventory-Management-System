@@ -1,63 +1,36 @@
 <?php
     include "header.php";
     include "connection.php";
-$sql = "SELECT * FROM product";
+$sql = "SELECT * FROM sales";
 $result = mysqli_query($conn, $sql);
 
-if (isset($_POST['submit'])) 
-{
-$id=$_POST['id'];
-$name=$_POST['name'];
-$des=$_POST['des'];
-$unit=$_POST['unit'];
-$unitprice=$_POST['unitprice'];
-$unitsale=$_POST['unitsale'];
-$totalprice=$unitprice*$unitsale;
-$u_unit=$unit-$unitsale;
+// invoice_id 	book_id 	sales_date 	quantity 	transaction_amount
 
-if($unit>=$unitsale)
-{
-  $insertsql = "INSERT INTO sales(name, sellunit, totalprice, productid) VALUES ('$name', '$unitsale', '$totalprice','$id')";
+if(isset($_POST['insert_btn'])){
+  $insert_invoice_id = $_POST['insert_invoice_id'];
+  $insert_book_id = $_POST['insert_book_id'];
+  $insert_sales_date = $_POST['insert_sales_date'];
+  $insert_quantity = $_POST['insert_quantity'];
+  $insert_transaction_amount = $_POST['insert_transaction_amount'];
 
-if ($conn->query($insertsql) === TRUE) 
-{
-  echo " Sell successfully";
-} 
-else 
-{
-  echo "Error: " . $sql . "<br>" . $conn->error;
+  $inserting_query = "INSERT INTO sales(book_id, sales_date, quantity, transaction_amount) VALUES ('$insert_book_id', '$insert_sales_date', '$insert_quantity','$insert_transaction_amount')";
+  $insert_query = mysqli_query($conn, $inserting_query);
+  if($insert_query){
+     header('location:sales.php');
+  }
 }
 
-$update_quantity_query = "UPDATE `product` SET unit = '$u_unit'  WHERE id = '$id'";
-
-if ($conn->query($update_quantity_query) === TRUE) 
-{
-  echo " Update successfully";
-} 
-else 
-{
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-header('location:sales.php');
-
-}
-else
-{
-  echo "Out Of Stock";
-}
-
-
-
+if(isset($_GET['remove'])){
+  $remove_id = $_GET['remove'];
+  mysqli_query($conn, "DELETE FROM sales WHERE invoice_id = '$remove_id'");
+  header('location:sales.php');
 };
-
-
 
 
 ?>
 <html>
 <head>
-    <title></title>
+    <title>Sales | PIMS</title>
 </head>
 <body>
     <div class="container">
@@ -66,13 +39,24 @@ else
   <thead>
     <tr>
       <!--<th scope="col">#</th>-->
-      <th scope="col">Product Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Unit</th>
-      <th scope="col">Unit Price</th>
-      <th scope="col">Sell Unit</th>
-      <th scope="col">Action</th>
+      <th scope="col">Invoice ID</th>
+      <th scope="col">Book ID</th>
+      <th scope="col">Sales Date</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Transaction Amount</th>
+      <th scope="col">Actions</th>
     </tr>
+              <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+               <tr>
+                <input type="hidden" name="insert_invoice_id"  value="">
+                <td></td>
+                <td><input type="number" name="insert_book_id"  value=""></td>
+                <td><input type="date" name="insert_sales_date"  value=""></td>
+                <td><input type="number" name="insert_quantity"  value=""></td>
+                <td><input type="number" name="insert_transaction_amount"  value=""></td>
+                <td><button type="submit" class="btn btn-primary" name="insert_btn">Insert</button></td>
+               </tr>
+              </form>
   </thead>
   <tbody>
    
@@ -81,23 +65,18 @@ else
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
               ?>
-             <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+
+               <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                <tr>
-               <input type="hidden" name="id"  value="<?php echo $row['id'];?>">
-                <input type="hidden" name="name"  value="<?php echo $row['name'];?>">
-                <input type="hidden" name="des"  value="<?php echo $row['des'];?>">
-               <input type="hidden" name="unit"  value="<?php echo $row['unit'];?>">
-                <input type="hidden" name="unitprice"  value="<?php echo $row['unitprice'];?>">
-                <td><?php echo $row['name'];?></td>
-                <td><?php echo $row['des'];?></td>
-                <td><?php echo $row['unit'];?></td>
-                <td><?php echo $row['unitprice'];?></td>
-                <td><div class="mb-3">
-                    <input type="number" name="unitsale" class="form-control" id="exampleInputUnit">
-               </div></td>
-                <td><button type="submit" class="btn btn-primary" name="submit">Sell Now</button></td>
+                <input type="hidden" name="invoice_id"  value="<?php echo $row['invoice_id'];?>">
+                <td><label><?php echo $row['invoice_id'];?></label></td>
+                <td><label><?php echo $row['book_id'];?></label></td>
+                <td><label><?php echo $row['sales_date'];?></label></td>
+                <td><label><?php echo $row['quantity'];?></label></td>
+                <td><label><?php echo $row['transaction_amount'];?></label></td>
+                <td><a class="btn btn-primary" href="sales.php?remove=<?php echo $row['invoice_id']; ?>">Delete</a></td>
                 </tr>
-                </form>
+              </form>
                 <?php }
         } else {
             echo "0 results";
