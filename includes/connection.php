@@ -1,4 +1,4 @@
-<?php
+<?php  //$servername = "localhost"; $username = "sakib_pub-mgmt"; $password = "#Password007"; $dbname = "sakib_pub-mgmt";
 $servername = "localhost";
 $username = "root";
 $password = "";
