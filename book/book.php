@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <?php
-    include "header.php";
-    include "connection.php";
+    include "../includes/header.php";
+    include "../includes/connection.php";
 
 $sql = "SELECT * FROM book";
 $result = mysqli_query($conn, $sql);
@@ -44,17 +45,19 @@ if(isset($_GET['remove'])){
 
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Book | PIMS</title>
     
     <!-- Style Sheet -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
   <br>
-    <div class="container">
+    <div class="container-fluid">
     <h5>Book List</h5>
     <br>
-    <table class="table table-striped">
+    <div class="scrollme">
+    <table class="table table-striped table-hover table-responsive align-middle width:100% display nowrap">
   <thead>
     <tr>
       <!--<th scope="col">#</th>-->
@@ -63,17 +66,17 @@ if(isset($_GET['remove'])){
       <th scope="col">Author</th>
       <th scope="col">Price</th>
       <th scope="col">Category</th>
-      <th scope="col">Actions</th>
+      <th scope="col" colspan="2">Actions</th>
     </tr>
               <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                <tr>
                 <input type="hidden" name="insert_book_id"  value="">
-                <td></td>
+                <td>#</td>
                 <td><input type="text" name="insert_book_name"  value=""></td>
                 <td><input type="text" name="insert_book_author"  value=""></td>
                 <td><input type="number" name="insert_book_price"  value=""></td>
                 <td><input type="text" name="insert_book_category"  value=""></td>
-                <td><button type="submit" class="btn btn-primary" name="insert_btn">Insert</button></td>
+                <td><button type="submit" class="btn btn-success" name="insert_btn">Insert</button></td>
                </tr>
               </form>
   </thead>
@@ -87,13 +90,13 @@ if(isset($_GET['remove'])){
              <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                <tr>
                 <input type="hidden" name="book_id"  value="<?php echo $row['book_id'];?>">
-                <td><label><?php echo $row['book_id'];?></label></td>
+                <td><label for="book id"><?php echo $row['book_id'];?></label></td>
                 <td><input type="text" name="book_name"  value="<?php echo $row['book_name'];?>"></td>
                 <td><input type="text" name="book_author"  value="<?php echo $row['book_author'];?>"></td>
                 <td><input type="number" name="book_price"  value="<?php echo $row['book_price'];?>"></td>
                 <td><input type="text" name="book_category"  value="<?php echo $row['book_category'];?>"></td>
-                <td><button type="submit" class="btn btn-primary" name="update_btn">Update</button></td>
-                <td><a class="btn btn-primary" href="book.php?remove=<?php echo $row['book_id']; ?>">Delete</a></td>
+                <td><button type="submit" class="btn btn-warning" name="update_btn">Update</button></td>
+                <td><a class="btn btn-danger" href="book.php?remove=<?php echo $row['book_id']; ?>">Delete</a></td>
                 </tr>
               </form>
                 <?php }
@@ -105,6 +108,7 @@ if(isset($_GET['remove'])){
     
   </tbody>
 </table>
+</div>
 </div>
 </body>
 </html>

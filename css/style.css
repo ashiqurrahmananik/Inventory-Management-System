@@ -7,11 +7,10 @@ a.navbar-brand {
   font-weight: 700;
 }
 
-banner{
-  color: gray;
-  align-self: center;
+.scrollme {
+  overflow-x: auto;
 }
 
-form-group submit-btn{
+.form-group submit-btn{
   align-self: center;
 }

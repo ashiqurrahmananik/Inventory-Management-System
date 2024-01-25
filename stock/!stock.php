@@ -1,6 +1,6 @@
 <?php
-    include "header.php";
-    include "connection.php";
+    include "../includes/header.php";
+    include "../includes/connection.php";
 
 $sql = "SELECT * FROM centralstore";
 $result = mysqli_query($conn, $sql);
@@ -14,7 +14,7 @@ if(isset($_POST['insert_btn'])){
   $inserting_query = "INSERT INTO centralstore (book_id, stock) VALUES ('$insert_book_id', '$insert_stock')";
   $insert_query = mysqli_query($conn, $inserting_query);
   if($insert_query){
-     header('location:centralstore.php');
+     header('location:stock.php');
   }
 }
 
@@ -25,14 +25,14 @@ if(isset($_POST['update_btn'])){
   $query = "UPDATE centralstore SET stock='$stock' WHERE book_id = '$update_book_id'";
   $update_query = mysqli_query($conn, $query);
   if($update_query){
-     header('location:centralstore.php');
+     header('location:stock.php');
   }
 };
 
 if(isset($_GET['remove'])){
   $remove_id = $_GET['remove'];
   mysqli_query($conn, "DELETE FROM centralstore WHERE book_id = '$remove_id'");
-  header('location:centralstore.php');
+  header('location:stock.php');
 };
 
 
@@ -40,11 +40,11 @@ if(isset($_GET['remove'])){
 
 <html>
 <head>
-    <title>Central Store | PIMS</title>
+    <title></title>
 </head>
 <body>
     <div class="container">
-    <h5>Stock Status @ Central Store</h5>
+    <h5>Stock Status</h5>
     <table class="table table-striped">
     <thead>
       <tr>
@@ -62,7 +62,6 @@ if(isset($_GET['remove'])){
                </tr>
               </form>
     </tbody>
-    </table>
 
     <table class="table table-striped">
   <thead>

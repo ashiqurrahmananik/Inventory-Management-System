@@ -1,7 +1,7 @@
 <?php
-    header('location:book.php');
-    include "header.php";
-    include "connection.php";
+    header('location:./book/book.php');
+    include "./includes/header.php";
+    include "./includes/connection.php";
 
 //$sql = "SELECT * FROM centralstore";
 $result = $conn -> query ($sql);

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php 
 
 SESSION_START();
@@ -6,7 +7,7 @@ if(isset($_SESSION['auth']))
 {
     if($_SESSION['auth']==1)
     {
-        header("location:book.php");
+        header("location:../book/book.php");
     }
 }
 
@@ -19,7 +20,7 @@ if(isset($_SESSION['auth']))
         if($id=='admin' && $pass=='admin')
         {
             $_SESSION['auth']=1;
-            header("location:book.php");
+            header("location:../book/book.php");
         }
 
         else
@@ -31,21 +32,22 @@ if(isset($_SESSION['auth']))
 
 
 ?>
-<!DOCTYPE html>
+
 <html>
 <head>
 	<title>Admin</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Sign in | PIMS</title>
 
 </head>
 <body>
-<div class="container">
-    <br>    <div class="d-flex justify-content-center">     <br><br><br>
-        <h2>Publishers Information Management System</h2>
+<div class="container-fluid">
+    <br>
+    <div class=""> <br>
+        <h2 class="d-flex justify-content-center">Publishers Information Management System</h2> <br>
     </div>
     <div class="d-flex justify-content-center">
         <div class="card">
@@ -62,7 +64,7 @@ if(isset($_SESSION['auth']))
                         <input type="password" class="form-control align-middle" placeholder="password" name="password">
                     </div>
                     <br>
-                    <div class="form-group submit-btn">
+                    <div class="form-group submit-btn d-flex justify-content-center">
                         <input type="submit" value="Login" class="btn btn-primary" name="submit">
                     </div>
                 </form>
