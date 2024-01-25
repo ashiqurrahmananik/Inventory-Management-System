@@ -61,7 +61,7 @@
         </li>
         -->
         <li class="nav-item">
-          <a class="nav-link" style="color:red!important;"  href="logout.php">Logout</a>
+          <a class="nav-link" style="color:red!important;"  href="../includes/logout.php">Logout</a>
         </li>
       </ul>
     </div>
